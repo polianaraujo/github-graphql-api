@@ -1,0 +1,178 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+}
+
+.container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 960px;
+    width: 100%;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+h1 {
+    color: #3498db;
+    margin-bottom: 30px;
+}
+
+h2 { /* Styles for section headings like "Sobre Mim", "Repositórios em Destaque", "Meus Repositórios" */
+    color: #555;
+    text-align: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee; /* Added a subtle line below section titles */
+    padding-bottom: 10px;
+    margin-top: 40px; /* Space above each new section heading */
+}
+
+h3 { /* Styles for individual repo titles within lists/cards */
+    color: #555;
+    margin-top: 0;
+}
+
+/* About Me Section */
+#about-me {
+    background-color: #eaf6fd;
+    padding: 25px;
+    border-radius: 8px;
+    margin-bottom: 40px;
+    text-align: left;
+    border-left: 5px solid #3498db;
+}
+
+#about-me h2 { /* Override for About Me h2 to remove border */
+    color: #2980b9;
+    margin-top: 0;
+    margin-bottom: 15px;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+#about-me p {
+    font-size: 1.1em;
+    color: #444;
+}
+
+/* Featured Repos Section */
+#featured-repos {
+    margin-bottom: 40px;
+}
+
+.featured-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.repo-card {
+    background: #e9ecef;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    border-left: 5px solid #2ecc71; /* A different color for featured */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.repo-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.repo-card h3 a {
+    color: #2ecc71; /* Green color for featured repo titles */
+    text-decoration: none;
+    font-size: 1.2em;
+}
+
+.repo-card h3 a:hover {
+    text-decoration: underline;
+}
+
+.repo-card p {
+    margin: 10px 0 0;
+    color: #666;
+}
+
+
+/* All Repos Section */
+#all-repos-section {
+    margin-bottom: 40px; /* Space below this section */
+}
+
+/* The actual list of paginated repositories */
+#repo-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+#repo-list li {
+    background: #e9ecef;
+    margin-bottom: 10px;
+    padding: 15px;
+    border-radius: 5px;
+    border-left: 5px solid #3498db;
+}
+
+#repo-list li strong a {
+    color: #3498db;
+    text-decoration: none;
+    font-size: 1.1em;
+}
+
+#repo-list li strong a:hover {
+    text-decoration: underline;
+}
+
+#repo-list li p {
+    margin: 5px 0 0;
+    color: #666;
+}
+
+#feedback {
+    text-align: center;
+    font-style: italic;
+    color: #777;
+    padding: 20px 0;
+}
+
+#pagination-controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+#pagination-controls button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#pagination-controls button:hover:not(:disabled) {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+}
+
+#pagination-controls button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}

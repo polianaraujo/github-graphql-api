@@ -3,17 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meus repositórios do Github</title>
+    <title>Meu Portfólio de Repositórios</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Meus repositórios</h1>
-    <div id="repo-list">
-        <p id="feedback">Carregando...</p>
-    </div>
-    
-    <div id="pagination-controls" style="margin-top: 20px;">
-        <button id="prev-button" disabled>Anterior</button>
-        <button id="next-button" disabled>Próximo</button>
+    <div class="container">
+        <header>
+            <h1>Meu Portfólio de Repositórios</h1>
+            <section id="about-me">
+                <h2>Sobre Mim</h2>
+                <p>Bem vindo! Meu nome é Poliana Ellen, uma desenvolvedora Python, com foco em Engenharia de Dados e Aprendizado de Máquina. Possuo experiência em projetos de iniciação científica na área de geofísica. Atualmente sou estagiária em Ciência de Dados na Aiyra Engenharia de Dados Este portfólio apresenta alguns dos meus projetos no GitHub, incluindo repositórios em destaque e uma visão geral dos meus outros trabalhos. Sinta-se à vontade para explorar!</p>
+            </section>
+        </header>
+
+        <main>
+            <section id="featured-repos">
+                <h2>Repositórios em Destaque</h2>
+                <div class="featured-grid">
+                    <div class="repo-card">
+                        <h3><a href="https://github.com/polianaraujo/time-lapse" target="_blank">Aplicação de Redes Neurais Recorrentes para Correspondência de Dados de Sísmica Time-Lapse</a></h3>
+                        <p>Este é um projeto em Python focado em RNN.</p>
+                    </div>
+                    <div class="repo-card">
+                        <h3><a href="https://github.com/polianaraujo/tarefa2" target="_blank">Análise Socioeconômica para Projeção de Alvos para Empresas</a></h3>
+                        <p>Processo de análise dados em ETL.</p>
+                    </div>
+                    <div class="repo-card">
+                        <h3><a href="https://github.com/polianaraujo/air-quality" target="_blank">Previsão de dados da qualidade do ar da cidade de Bogotá</a></h3>
+                        <p>Um estudo de caso de previsão de dados com o uso de redes neurais simples e visualizar em um mapa ao longo do tempo.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="all-repos-section">
+                <h2>Todos os meus Repositórios</h2>
+                <div id="repo-list">
+                    <p id="feedback">Carregando...</p>
+                </div>
+                
+                <div id="pagination-controls">
+                    <button id="prev-button" disabled>Anterior</button>
+                    <button id="next-button" disabled>Próximo</button>
+                </div>
+            </section>
+        </main>
     </div>
 
     <script type="module" src="index.js"></script>

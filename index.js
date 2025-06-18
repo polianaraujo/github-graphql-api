@@ -4,19 +4,10 @@
 
 const url = "https://api.github.com/graphql";
 const token = import.meta.env.VITE_GITHUB_ACCESS_TOKEN;
-// const queryGraphQL = `{
-//     viewer {
-//         login
-//         repositories(first: 10, orderBy: {field: UPDATED_AT, direction: DESC}) {
-//             nodes{
-//                 name
-//                 url
-//                 description
-//             }
-//             totalCount
-//         }
-//     }
-// }`;
+
+// A quantidade de repositórios por página para a seção principal
+const REPOS_PER_PAGE = 10; // Changed back to 10
+
 const queryGraphQL = `
 query GetRepositories($first: Int, $after: String, $last: Int, $before: String) {
     viewer {
@@ -29,7 +20,7 @@ query GetRepositories($first: Int, $after: String, $last: Int, $before: String) 
             orderBy: { field: UPDATED_AT, direction: DESC }
         ) {
             nodes {
-                id # Precisamos do ID para o Star/Unstar no futuro
+                id 
                 name
                 url
                 description
@@ -48,7 +39,7 @@ query GetRepositories($first: Int, $after: String, $last: Int, $before: String) 
 // referências dos botões do HTML para que possamos manipulá-los no JavaScript.
 const prevButton = document.querySelector('#prev-button');
 const nextButton = document.querySelector('#next-button');
-
+const feedbackElement = document.querySelector('#feedback'); // Get a reference to the feedback element
 
 // -----------------------------------------------------------------
 // SEÇÃO 2: A FUNÇÃO DE RENDERIZAÇÃO (O "PINTOR" DA PÁGINA)
@@ -78,9 +69,9 @@ const renderRepos = (data) => {
         repoListHTML += `</ul>`;
 
         // Pega o elemento 'feedback' no HTML e substitui seu conteúdo pela nossa lista.
-        document.querySelector('#feedback').innerHTML = repoListHTML;
+        feedbackElement.innerHTML = repoListHTML; // Use the stored reference
     } else {
-        document.querySelector('#feedback').innerHTML = "Não foi possível buscar os repositórios, mas a conexão foi bem-sucedida.";
+        feedbackElement.innerHTML = "Não foi possível buscar os repositórios, mas a conexão foi bem-sucedida.";
         console.log('Resposta da API:', data);
     }
 };
@@ -93,10 +84,10 @@ const renderRepos = (data) => {
 // fetchData se preocupa em buscar os dados, e a renderRepos se preocupa em exibir os dados.
 
 // Esta é a função mais importante. Ela é assíncrona e lida com toda a lógica da API.
-const fetchData = async ({ first = 10, after = null, last = null, before = null }) => {
+const fetchData = async ({ first = REPOS_PER_PAGE, after = null, last = null, before = null }) => {
 
     // 1. Fornece feedback visual imediato ao usuário.
-    document.querySelector('#feedback').innerHTML = '<p>Carregando...</p>';
+    feedbackElement.innerHTML = '<p>Carregando...</p>'; // Use the stored reference
     prevButton.disabled = true;
     nextButton.disabled = true;
 
@@ -145,7 +136,7 @@ const fetchData = async ({ first = 10, after = null, last = null, before = null 
 
     } catch (e) {
         // Se qualquer erro ocorrer no bloco 'try', ele é capturado aqui.
-        document.querySelector('#feedback').innerHTML = 'Erro ao conectar à API GraphQL do Github ou ao buscar repositórios.';
+        feedbackElement.innerHTML = 'Erro ao conectar à API GraphQL do Github ou ao buscar repositórios.'; // Use the stored reference
         console.error(e);
     }
 };
@@ -158,14 +149,14 @@ const fetchData = async ({ first = 10, after = null, last = null, before = null 
 // Define o que acontece quando o botão "Próximo" é clicado.
 nextButton.addEventListener('click', () => {
     // Chama a função fetchData com os argumentos para ir PARA FRENTE.
-    fetchData({ first: 10, after: nextButton.dataset.cursor });
+    fetchData({ first: REPOS_PER_PAGE, after: nextButton.dataset.cursor });
 });
 
 // Define o que acontece quando o botão "Anterior" é clicado.
 prevButton.addEventListener('click', () => {
     // Chama a função fetchData com os argumentos para ir PARA TRÁS.
     // A chave aqui é `first: null` para evitar o conflito de `first` e `last` na mesma chamada.
-    fetchData({ first: null, last: 10, before: prevButton.dataset.cursor });
+    fetchData({ first: null, last: REPOS_PER_PAGE, before: prevButton.dataset.cursor });
 });
 
 
@@ -175,4 +166,4 @@ prevButton.addEventListener('click', () => {
 
 // Quando o script carrega, esta é a primeira e única chamada direta à fetchData.
 // Ela busca a primeira página de 10 repositórios e inicia todo o ciclo.
-fetchData({ first: 10 });
+fetchData({ first: REPOS_PER_PAGE });
