@@ -34,9 +34,9 @@ jobs:
           git fetch upstream main
           git rebase upstream/main || echo "⚠️ Rebase had conflicts and was skipped"
 
-          rm -rf portfolio
-          mkdir -p portfolio
-          cp -r ../dist/* portfolio/
+          rm -rf portfolio_gql
+          mkdir -p portfolio_gql
+          cp -r ../dist/* portfolio_gql/
 
           git add .
           git commit -m "Deploy via GitHub Actions 🚀" || echo "Nothing to commit"
